@@ -1,0 +1,58 @@
+\documentclass{book}
+
+\usepackage[a4paper]{geometry}
+\usepackage{hyperref}
+
+\title{Effective Qt}
+\author{Bart Vandewoestyne}
+
+\newcommand{\file}[1]{\texttt{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\newenvironment{guideline}
+{ \begin{quote} }
+{ \end{quote} }
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{QObject}
+
+\begin{guideline}
+Prefer to use the \code{Q\_OBJECT} macro for subclasses of \code{QObject}.
+\end{guideline}
+Do this regardless of whether or not your subclasses of \code{QObject} actually use signals, slots, and properties.
+
+\section{QString}
+
+\begin{guideline}
+Use the multi-argument for of \code{QString::arg()}.
+\end{guideline}
+Instead of
+\begin{verbatim}
+QString("%1 %2 %3).arg(1).arg(2).arg(3)
+\end{verbatim}
+use
+\begin{verbatim}
+QString("%1 %2 %3").arg(QString::number(1), QString::number(2), QString::number(3));
+\end{verbatim}
+(See \url{http://doc.qt.io/qt-4.8/qstring.html#arg-2} and \url{https://youtu.be/Ov7s0GgBbOQ?t=45m40s}.
+
+\section{Dynamic casting}
+
+\begin{guideline}
+Prefer \code{qobject\_cast()} over \code{dynamic\_cast()} for QObject classes.
+\end{guideline}
+The \code{qobject\_cast()} function behaves similarly to the standard C++ \code{dynamic\_cast()}, with the advantages that it doesn't require RTTI support and it works across dynamic library boundaries.
+
+\section{Coding practice}
+
+\begin{guideline}
+Use \code{QT\_FATAL\_WARNINGS}
+\end{guideline}
+Set the \code{QT\_FATAL\_WARNINGS} environment variable so that \code{qWarning()} exits after printing the warning message.
+
+\end{document}
