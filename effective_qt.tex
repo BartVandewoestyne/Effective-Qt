@@ -63,6 +63,25 @@ References:
 \item \bibentry{mutz2015}
 \end{itemize}
 
+\section{Containers}
+
+\begin{guideline}
+Remember that \lstinline|QList| has nothing to do with \lstinline|std::list|, and \code{QSet} has nothing to do with \code{std::set}.
+\end{guideline}
+References:
+\begin{itemize}
+\item \bibentry{mutz2011}
+\end{itemize}
+
+\begin{guideline}
+Be aware of the two Qt container APIs, Qt-ish and STL-compatible, and avoid mixing their use in the same project.
+\end{guideline}
+If in doubt, go with the STL API — it won’t change come Qt 5.If in doubt, go with the STL API — it won’t change come Qt 5.
+References:
+\begin{itemize}
+\item \bibentry{mutz2011}
+\end{itemize}
+
 \section{Dynamic casting}
 
 \begin{guideline}
