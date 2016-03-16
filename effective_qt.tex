@@ -95,8 +95,30 @@ The \code{qobject\_cast()} function behaves similarly to the standard C++ \code{
 \begin{guideline}
 Use \code{QT\_FATAL\_WARNINGS}
 \end{guideline}
-
 Set the \code{QT\_FATAL\_WARNINGS} environment variable so that \code{qWarning()} exits after printing the warning message.
+
+\begin{guideline}
+% https://www.semipol.de/2010/08/09/unused-parameters-in-cpp.html
+% http://stackoverflow.com/questions/5765320/clean-way-to-eliminate-unused-parameter-widget-warning-generated-by-qgraphic
+Don't use the \lstinline{Q_UNUSED} macro to indicate that a parameter is not used, but simply comment the variable name in the function parameter list.
+\end{guideline}
+The reason for this is that it has the drawback of having a potential for confusion.  Maybe sometime later you need the parameter but forget to remove the \lstinline{Q_UNUSED} macro, hence generating something like this:
+\begin{lstlisting}
+foo(int aParameter) {
+    Q_UNUSED(aParameter)
+    // 30 lines of other method code
+    int anotherVariable = 30 * aParameter;
+}
+\end{lstlisting}
+Suddenly your code documents that a variable isn't used but actually it is and the compiler can't detect this error.  Instead, you can simply comment the variable name:
+\begin{lstlisting}
+foo(int /*aParameter*/) {
+    // 30 lines of other method code
+    int anotherVariable = 30 * aParameter;
+}
+\end{lstlisting}
+Now the warning is gone, too and the compiler can detect either the illegal use of the variable in line three or the illegal statement that this variable is unused by purpose.
+Another advantage of avoiding the \lstinline{Q_UNUSED} macro is that it makes your code less dependent of the Qt libraries.
 
 \bibliographystyle{plain}
 \bibliography{references}
