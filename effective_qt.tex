@@ -1,5 +1,7 @@
 \documentclass{book}
 
+% TODO: https://www.kdab.com/uncovering-32-qt-best-practices-compile-time-clazy/
+
 \usepackage[a4paper]{geometry}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -132,6 +134,13 @@ foo(int /*aParameter*/) {
 \end{lstlisting}
 Now the warning is gone, too and the compiler can detect either the illegal use of the variable in line three or the illegal statement that this variable is unused by purpose.
 Another advantage of avoiding the \lstinline{Q_UNUSED} macro is that it makes your code less dependent of the Qt libraries.
+
+\begin{guideline}
+Use clazy: \url{https://github.com/KDE/clazy/}
+% See also:
+%   https://www.kdab.com/use-static-analysis-improve-performance/
+%   https://www.kdab.com/uncovering-32-qt-best-practices-compile-time-clazy/
+\end{guideline}
 
 \bibliographystyle{plain}
 \bibliography{references}
