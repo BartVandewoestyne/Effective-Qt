@@ -81,6 +81,10 @@ References:
 \section{Containers}
 
 \begin{guideline}
+Use \lstinline|QVector<T>| instead of \lstinline|QList<T>| if \lstinline|sizeof(T) > sizeof(void*)|.  See \url{https://marcmutz.wordpress.com/2010/07/29/sneak-preview-qlist-considered-harmful/} and \url{https://www.kdab.com/uncovering-32-qt-best-practices-compile-time-clazy/} for reasons why.
+\end{guideline}
+
+\begin{guideline}
 Remember that \lstinline|QList| has nothing to do with \lstinline|std::list|, and \code{QSet} has nothing to do with \code{std::set}.
 \end{guideline}
 References:
