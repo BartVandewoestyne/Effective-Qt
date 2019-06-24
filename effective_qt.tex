@@ -53,6 +53,8 @@ References:
 \item \bibentry{metaobjectsystem}
 \end{itemize}
 
+Also, when subclassing \code{QObject} indirectly (e.g. via a subclass of a subclass of QObject), still prefer to add the \code{Q\_OBJECT} macro, regardless of whether you also define signals or slots.  See e.g. \url{https://marcmutz.wordpress.com/effective-qt/subclassing/}.
+
 \section{Signals and Slots}
 \begin{guideline}
 From Qt 5.8 on, always define \code{QT\_NO\_NARROWING\_CONVERSIONS\_IN\_CONNECT} in your \file{.pro} file.
